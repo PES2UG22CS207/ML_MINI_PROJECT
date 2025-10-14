@@ -1,0 +1,145 @@
+Used Car Price Prediction: Exploratory Analysis and Linear Regression
+This repository contains the Jupyter Notebook (pes2ug23cs046-pes2ug22cs207[1].ipynb) which details the process of predicting used car prices using a basic Linear Regression model on a large dataset of used car listings.
+
+The project covers data loading, initial exploration, cleaning, feature encoding, model training, and performance evaluation.
+
+📊 Dataset
+The analysis utilizes the 852K Used Car Listings dataset sourced from Kaggle.
+
+Purpose
+
+Source File
+
+Training Data
+
+tc20171021.csv
+
+Testing Data
+
+true_car_listings.csv
+
+🚀 Key Project Stages
+1. Data Ingestion and Cleaning
+The notebook starts by loading the training and test datasets.
+
+Initial Review: The training data contains 852,122 rows and 8 columns.
+
+Cleaning: Column names are standardized to lowercase. An initial check shows no missing values in the selected columns (price, year, mileage, city, state, vin, make, model).
+
+Feature Review: The vin (Vehicle Identification Number) column, though unique, is not used as a predictive feature in this linear model.
+
+2. Exploratory Data Analysis (EDA) Summary
+Feature
+
+Type
+
+Key Observation
+
+price
+
+Numerical (Target)
+
+Range from 1500 to 499500.
+
+year
+
+Numerical
+
+Range from 1997 to 2018.
+
+mileage
+
+Numerical
+
+High maximum value (2,856,196) indicates potential extreme outliers.
+
+city
+
+Categorical
+
+2,553 unique city values.
+
+state
+
+Categorical
+
+59 unique states/state variations (suggesting minor cleaning needed for case consistency).
+
+make
+
+Categorical
+
+58 unique manufacturers.
+
+model
+
+Categorical
+
+2,736 unique models.
+
+3. Feature Preprocessing and Encoding
+Target Preparation: The price column is extracted as the target variable (Y). Rows with non-numeric or missing target values are dropped to ensure a clean training set.
+
+Categorical Encoding: The categorical features (state, city, make, model) are transformed using OrdinalEncoder.
+
+Note: Ordinal encoding is used, which assigns an integer rank to each category.
+
+4. Linear Regression Model & Evaluation
+A standard Linear Regression model (sklearn.linear_model.LinearRegression) is trained on the processed data.
+
+Performance Metrics
+Metric
+
+Value
+
+Interpretation
+
+R² Score
+
+0.206
+
+The model explains approximately 20.6% of the variance, indicating a relatively weak fit.
+
+Root Mean Squared Error (RMSE)
+
+12118.04
+
+On average, the model's price prediction is off by about $12,118.
+
+Feature Coefficients (Influence)
+Feature
+
+Coefficient
+
+Influence
+
+year
+
++742.56
+
+Most Influential Positive Feature. Newer cars (higher year value) strongly increase the predicted price.
+
+make
+
+-66.41
+
+Moderate negative influence.
+
+state
+
++22.88
+
+Moderate positive influence.
+
+mileage
+
+-0.09
+
+Negative Influence. Higher mileage slightly decreases the price.
+
+⏭️ Next Steps for Improvement
+Outlier Management: Address the extreme outliers in the mileage and price features.
+
+Advanced Encoding: Replace Ordinal Encoding with One-Hot Encoding for high-cardinality categorical variables.
+
+Model Selection: Explore more advanced models (e.g., Random Forest, Gradient Boosting) that can better handle non-linear relationships.
