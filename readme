@@ -1,145 +1,83 @@
 Used Car Price Prediction: Exploratory Analysis and Linear Regression
-This repository contains the Jupyter Notebook (pes2ug23cs046-pes2ug22cs207[1].ipynb) which details the process of predicting used car prices using a basic Linear Regression model on a large dataset of used car listings.
 
-The project covers data loading, initial exploration, cleaning, feature encoding, model training, and performance evaluation.
+This repository contains the Jupyter Notebook pes2ug23cs046-pes2ug22cs207[1].ipynb, which demonstrates the process of predicting used car prices using a Linear Regression model on a large dataset of used car listings.
+
+The notebook includes steps for data loading, exploration, cleaning, feature encoding, model training, and performance evaluation.
 
 📊 Dataset
-The analysis utilizes the 852K Used Car Listings dataset sourced from Kaggle.
 
-Purpose
+The project uses the 852K Used Car Listings dataset sourced from Kaggle.
 
-Source File
+⚠️ Note:
+The training and testing datasets are too large (each exceeding hundreds of MBs) to be uploaded directly to GitHub.
+To run the notebook successfully, please execute it on Kaggle Notebooks
+, where the datasets are available publicly.
 
-Training Data
-
-tc20171021.csv
-
-Testing Data
-
-true_car_listings.csv
-
-🚀 Key Project Stages
+Dataset References
+Purpose	Source File
+Training Data	tc20171021.csv
+Testing Data	true_car_listings.csv
+🚀 Project Workflow
 1. Data Ingestion and Cleaning
-The notebook starts by loading the training and test datasets.
 
-Initial Review: The training data contains 852,122 rows and 8 columns.
+Loads training and test datasets from Kaggle.
 
-Cleaning: Column names are standardized to lowercase. An initial check shows no missing values in the selected columns (price, year, mileage, city, state, vin, make, model).
+Initial Review: Training data has 852,122 rows × 8 columns.
 
-Feature Review: The vin (Vehicle Identification Number) column, though unique, is not used as a predictive feature in this linear model.
+Cleaning: Standardized column names; no missing values in key columns (price, year, mileage, city, state, vin, make, model).
+
+The vin column (Vehicle Identification Number) is excluded from modeling as it’s unique per car.
 
 2. Exploratory Data Analysis (EDA) Summary
-Feature
-
-Type
-
-Key Observation
-
-price
-
-Numerical (Target)
-
-Range from 1500 to 499500.
-
-year
-
-Numerical
-
-Range from 1997 to 2018.
-
-mileage
-
-Numerical
-
-High maximum value (2,856,196) indicates potential extreme outliers.
-
-city
-
-Categorical
-
-2,553 unique city values.
-
-state
-
-Categorical
-
-59 unique states/state variations (suggesting minor cleaning needed for case consistency).
-
-make
-
-Categorical
-
-58 unique manufacturers.
-
-model
-
-Categorical
-
-2,736 unique models.
-
+Feature	Type	Key Observation
+price	Numerical (Target)	Ranges from 1,500 to 499,500
+year	Numerical	Ranges from 1997 to 2018
+mileage	Numerical	Maximum ~2.8M → potential outliers
+city	Categorical	2,553 unique cities
+state	Categorical	59 unique values (case variations)
+make	Categorical	58 manufacturers
+model	Categorical	2,736 unique models
 3. Feature Preprocessing and Encoding
-Target Preparation: The price column is extracted as the target variable (Y). Rows with non-numeric or missing target values are dropped to ensure a clean training set.
 
-Categorical Encoding: The categorical features (state, city, make, model) are transformed using OrdinalEncoder.
+Target: price extracted as Y, non-numeric rows dropped.
 
-Note: Ordinal encoding is used, which assigns an integer rank to each category.
+Categorical Encoding: state, city, make, model encoded using OrdinalEncoder.
+
+📝 Ordinal encoding assigns an integer rank to each category.
 
 4. Linear Regression Model & Evaluation
-A standard Linear Regression model (sklearn.linear_model.LinearRegression) is trained on the processed data.
+
+Model: sklearn.linear_model.LinearRegression
+
+Trained on the processed dataset.
 
 Performance Metrics
-Metric
+Metric	Value	Interpretation
+R² Score	0.206	Explains ~20.6% variance → basic linear relationship
+RMSE	12,118.04	Average prediction error ≈ $12K
+Feature Influence
+Feature	Coefficient	Influence
+year	+742.56	Strong positive effect (newer cars = higher price)
+make	-66.41	Moderate negative
+state	+22.88	Slight positive
+mileage	-0.09	Negative — higher mileage lowers price
+🔍 Next Steps
 
-Value
+Outlier Handling: Remove or cap extreme mileage and price values.
 
-Interpretation
+Advanced Encoding: Use One-Hot Encoding for categorical variables.
 
-R² Score
+Model Upgrade: Try Random Forest, Gradient Boosting, or XGBoost for non-linear modeling.
 
-0.206
+🧠 How to Run the Notebook
 
-The model explains approximately 20.6% of the variance, indicating a relatively weak fit.
+Since the dataset is large, run this notebook directly on Kaggle:
 
-Root Mean Squared Error (RMSE)
+Visit Kaggle Datasets
+ and search for “Used Car Listings” or “tc20171021.csv”.
 
-12118.04
+Create a Kaggle Notebook.
 
-On average, the model's price prediction is off by about $12,118.
+Upload or link the dataset from Kaggle’s dataset section.
 
-Feature Coefficients (Influence)
-Feature
-
-Coefficient
-
-Influence
-
-year
-
-+742.56
-
-Most Influential Positive Feature. Newer cars (higher year value) strongly increase the predicted price.
-
-make
-
--66.41
-
-Moderate negative influence.
-
-state
-
-+22.88
-
-Moderate positive influence.
-
-mileage
-
--0.09
-
-Negative Influence. Higher mileage slightly decreases the price.
-
-⏭️ Next Steps for Improvement
-Outlier Management: Address the extreme outliers in the mileage and price features.
-
-Advanced Encoding: Replace Ordinal Encoding with One-Hot Encoding for high-cardinality categorical variables.
-
-Model Selection: Explore more advanced models (e.g., Random Forest, Gradient Boosting) that can better handle non-linear relationships.
+Upload this .ipynb notebook to your Kaggle workspace and run all cells.
